@@ -8,8 +8,8 @@
 
     <div id="content">
       <div class="left">
-        <div class="country-list">
-
+        <div class="list-countries">
+          <ListCountries />
         </div>
       </div>
 
@@ -21,8 +21,13 @@
 </template>
 
 <script>
+import ListCountries from './components/ListCountries.vue'
+
 export default {
   name: 'App',
+  components:{
+    ListCountries
+  },
 }
 </script>
 
@@ -55,7 +60,7 @@ body{
 }
 
 .left{
-  width: 150px;
+  width: 200px;
   
 }
 
@@ -65,10 +70,10 @@ body{
   background-color: gainsboro;
 }
 
-.country-list{
+.list-countries{
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 100%;
+  height: 90vh;
 }
 
 
@@ -79,7 +84,7 @@ body{
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: gainsboro;
+  background: #f7f7f7;
 }
 
 /* Handle */
