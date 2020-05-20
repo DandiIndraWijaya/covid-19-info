@@ -1,10 +1,10 @@
 <template>
-    <div class="listCountries">
+    <div id="listCountries">
         <center><h4>List Countries</h4></center>
         <ul>
             <li v-for="(row, index) in countries" :key="index">
                 <center>
-                    <button class="btn-country">
+                    <button @click="showData(row)" class="btn-country">
                         <font>{{row}}</font>
                     </button>
                 </center>
@@ -33,7 +33,12 @@ export default {
                     "x-rapidapi-host":"covid-193.p.rapidapi.com",
                     "x-rapidapi-key":"5613c62dbbmsha8b136aae9e5a3dp16431ejsn867af4e887d6",
                     "useQueryString":true}
-                }).then(response => this.countries = response.data.response );
+                })
+                .then(response => this.countries = response.data.response );
+        },
+        showData(c){
+            let country = c;
+            this.$root.$emit('emitCountry', country);
         }
     },
     mounted() {
@@ -61,12 +66,14 @@ ul{
     background-color: skyblue;
     font-size: 14px;
     transition: width 0.5s, height 0.5s;
+    font-weight: bold;
 }
 
 .btn-country:hover{
     width: 100%;
     height: 46px;
     font-size: 20px;
+    font-weight: bold;
 }
 
 .btn-country font{

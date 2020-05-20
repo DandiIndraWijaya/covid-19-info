@@ -14,7 +14,7 @@
       </div>
 
       <div class="right">
-        gdg
+          <Statistics />
       </div>
     </div>
   </div>
@@ -22,11 +22,13 @@
 
 <script>
 import ListCountries from './components/ListCountries.vue'
+import Statistics from './components/Statistics.vue'
 
 export default {
   name: 'App',
   components:{
-    ListCountries
+    ListCountries,
+    Statistics
   },
 }
 </script>
