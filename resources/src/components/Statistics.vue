@@ -7,79 +7,81 @@
         </div>
 
         <div class="data">
-            <div class="card time">
+            <div class="current-data">
+                <div class="card time">
+                    <table>
+                        <tr>
+                            <td>Day </td>
+                            <td>:</td>
+                            <td>{{ day }}</td>
+                        </tr>
+                        <tr>
+                            <td>time </td>
+                            <td>:</td>
+                            <td>{{ time }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card case">
+                    <center>
+                        <font class="title">Cases</font>
+                    </center>
+                    <hr>
+                    <table>
+                        <tr>
+                            <td class="active-case">New </td>
+                            <td>:</td>
+                            <td>{{ newCases }}</td>
+                        </tr>
+                        <tr>
+                            <td class="active-case">Active </td>
+                            <td>:</td>
+                            <td>{{ activeCases }}</td>
+                        </tr>
+                        <tr>
+                            <td class="critical-case">Critical </td>
+                            <td>:</td>
+                            <td>{{ criticalCases }}</td>
+                        </tr>
+                        <tr>
+                            <td class="recovered-case">Recovered </td>
+                            <td>:</td>
+                            <td>{{ recoveredCases }}</td>
+                        </tr>
+                        <tr>
+                            <td class="total-case">Total </td>
+                            <td>:</td>
+                            <td>{{ totalCases }}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="card death">
+                    <center>
+                        <font class="title">Deaths</font>
+                    </center>
+                    <hr>
                 <table>
                     <tr>
-                        <td>Day </td>
+                        <td>New</td>
                         <td>:</td>
-                        <td>{{ day }}</td>
+                        <td>{{ newDeaths }}</td>
                     </tr>
                     <tr>
-                        <td>time </td>
+                        <td>Total</td>
                         <td>:</td>
-                        <td>{{ time }}</td>
+                        <td>{{ totalDeaths }}</td>
                     </tr>
                 </table>
-            </div>
-            <div class="card case">
-                <center>
-                    <font class="title">Cases</font>
-                </center>
-                <hr>
-                <table>
-                    <tr>
-                        <td class="active-case">New </td>
-                        <td>:</td>
-                        <td>{{ newCases }}</td>
-                    </tr>
-                    <tr>
-                        <td class="active-case">Active </td>
-                        <td>:</td>
-                        <td>{{ activeCases }}</td>
-                    </tr>
-                    <tr>
-                        <td class="critical-case">Critical </td>
-                        <td>:</td>
-                        <td>{{ criticalCases }}</td>
-                    </tr>
-                    <tr>
-                        <td class="recovered-case">Recovered </td>
-                        <td>:</td>
-                        <td>{{ recoveredCases }}</td>
-                    </tr>
-                    <tr>
-                        <td class="total-case">Total </td>
-                        <td>:</td>
-                        <td>{{ totalCases }}</td>
-                    </tr>
-                </table>
-            </div>
+                </div>
 
-            <div class="card death">
-                <center>
-                    <font class="title">Deaths</font>
-                </center>
-                <hr>
-               <table>
-                   <tr>
-                       <td>New</td>
-                       <td>:</td>
-                       <td>{{ newDeaths }}</td>
-                   </tr>
-                   <tr>
-                       <td>Total</td>
-                       <td>:</td>
-                       <td>{{ totalDeaths }}</td>
-                   </tr>
-               </table>
-            </div>
-
-            <div class="card test">
-                <center>
-                    <font class="title">Tests</font>
-                </center>
-                <hr>
-                <center>{{ tests }}</center>
+                <div class="card test">
+                    <center>
+                        <font class="title">Tests</font>
+                    </center>
+                    <hr>
+                    <center>{{ tests }}</center>
+                </div>
             </div>
         </div>       
     </div>
@@ -92,6 +94,7 @@ export default {
     name: 'Statistics',
     data: function(){
         return{
+            country: '',
             newCases: '',
             activeCases: '',
             criticalCases: '',
@@ -141,11 +144,14 @@ export default {
 
                     document.querySelector('.data').style.display = "block";
                     console.log(response);
-                })
+                });
         }
     },
     mounted(){
-        this.$root.$on('emitCountry', country => {this.showStatistics(country)});
+        this.$root.$on('emitCountry', country => {
+            this.country = country
+            this.showStatistics(this.country);
+        });
     }
 }
 </script>
@@ -154,6 +160,10 @@ export default {
 
 #statistics{
     background-color: gainsboro;
+}
+
+.chart{
+    display: none;
 }
 
 .data{

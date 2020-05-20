@@ -14,7 +14,12 @@
       </div>
 
       <div class="right">
-          <Statistics />
+        <div class="statistics">
+           <Statistics />
+        </div>
+         <div class="history-data">
+           <HistoryData />
+         </div>
       </div>
     </div>
   </div>
@@ -23,12 +28,15 @@
 <script>
 import ListCountries from './components/ListCountries.vue'
 import Statistics from './components/Statistics.vue'
+import HistoryData from './components/HistoryData.vue'
+
 
 export default {
   name: 'App',
   components:{
     ListCountries,
-    Statistics
+    Statistics,
+    HistoryData
   },
 }
 </script>
@@ -70,6 +78,13 @@ body{
   width: 100%;
   height: 100vh;
   background-color: gainsboro;
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+
+.history-data{
+  background-color: white;
 }
 
 .list-countries{
